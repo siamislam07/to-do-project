@@ -8,8 +8,8 @@ const Banner = () => {
     return (
         <div className="">
             {/* <img className="w-full object-cover" src="https://th.bing.com/th/id/R.d7c94a31b868bae4a15510057601e91a?rik=F7BmTfWqGQMpjg&pid=ImgRaw&r=0" alt="" /> */}
-            <div className="hero min-h-screen bg-fixed" style={{ backgroundImage: 'url(https://i.ibb.co/Mf9RXkz/bg.jpg)' }}>
-                <div className="hero-overlay bg-opacity-50"></div>
+            <div className="hero min-h-screen mb-56 bg-fixed " style={{ backgroundImage: 'url(https://i.ibb.co/Mf9RXkz/bg.jpg)' }}>
+                <div className="hero-overlay bg-opacity-40 backdrop-blur-sm   "></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
                         <h1 className="mb-5 text-7xl font-serif text-white font-bold">Hello there</h1>
