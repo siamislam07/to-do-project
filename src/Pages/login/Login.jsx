@@ -1,14 +1,29 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../provide/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const {googleSignIn} = useContext(AuthContext)
     const navigate = useNavigate()
+    const {signIn} = useContext(AuthContext)
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log(e);
+        signIn(email, password)
+        .then(result=>{
+            console.log(result);
+            toast.success('Login Successful')
+            navigate(location?.state ? location.state : '/')
+        })
+        .catch(error=>{
+            console.log(error);
+            toast.error('Please Try With Google')
+            toast.error(error.message)
+        })
     }
 
     const handleGoogleSignIn = () => {
@@ -40,13 +55,15 @@ const Login = () => {
                     </button>
                     <span className="mb-2 text-gray-900">Or</span>
                     <form onSubmit={handleSubmit}>
-                        <input type="text" className="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium " placeholder="Email" />
-                        <input type="password" className="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium " placeholder="Password" value="sdfsdaf" />
+                        <input onChange={e => setEmail(e.target.value)} type="email" className="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium " placeholder="Email" />
+                        <input onBlur={e => setPassword(e.target.value)} type="password" className="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium " placeholder="Password"  />
                         <button className="bg-slate-500 hover:bg-slate-700 text-white text-base rounded-lg py-2.5 px-5 transition-colors w-full text-[19px]">Log In</button>
                     </form>
+
                     <p className="text-center mt-3 text-[14px]">Don&#x27;t have an account?
-                        <a href="/signup" className="text-gray-600">Create one</a>
+                        <Link to="/register" clLinkssName="text-gray-600">Create one</Link>
                     </p>
+
                     {/* <p className="text-center mt-3 text-[14px]">By clicking continue, you agree to our
                         <a href="/terms" className="text-gray-600">Terms of Service</a> and <a href="/privacy" className="text-gray-600">Privacy Policy</a>.
                     </p> */}
